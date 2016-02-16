@@ -195,7 +195,7 @@
       }
     },
     {
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('vmNamePrefix')]",
       "location": "[resourceGroup().location]",
@@ -209,7 +209,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computername": "[variables('vmNamePrefix')]",
+          "computerName": "[variables('vmNamePrefix')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -244,6 +244,12 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nic2NamePrefix'))]"
             }
           ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+             "enabled": "true",
+             "storageUri": "[concat('http://',parameters('StorageAccountName'),'.blob.core.windows.net')]"
+          }
         }
       }
     }

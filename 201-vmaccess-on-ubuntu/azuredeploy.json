@@ -74,7 +74,7 @@
       },
       "allowedValues": [
         "14.04.2-LTS",
-        "15.04",
+        "15.10",
         "14.10"
       ]
     },
@@ -118,7 +118,7 @@
     }
   },
   "variables": {
-    "api-version": "2015-05-01-preview",
+    "api-version": "2015-06-15",
     "virtualNetworkName": "vnet-vmaccess",
     "nicName": "[parameters('vmName')]",
     "publicIPAddressName": "[parameters('vmName')]",
@@ -218,7 +218,7 @@
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computername": "[parameters('vmName')]",
+          "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -244,6 +244,12 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
             }
           ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+             "enabled": "true",
+             "storageUri": "[concat('http://',parameters('newStorageAccountName'),'.blob.core.windows.net')]"
+          }
         }
       }
     },
